@@ -48,6 +48,9 @@ class ProxyService
         $ppidRaw = $this->getPpid();
         $ppid = base64_encode($ppidRaw);
         $udataRaw = $productCode . '|' . $customerCode . '|' . $respid . '|' . $amount;
+        if (blank($amount)) {
+            $udataRaw = $productCode . '|' . $customerCode . '|' . $respid;
+        }
         $udata = base64_encode($udataRaw);
         $ket = '';
         $xApiKey = config('setting.credentials.x_api_key');

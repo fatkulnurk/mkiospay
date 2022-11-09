@@ -20,7 +20,8 @@ class TelenjarController extends Controller
             $request->filled('NONTALGIS') ||
             $request->filled('TELKOM') ||
             $request->filled('BPJS') ||
-            $request->filled('MULTIFINANCE')
+            $request->filled('MULTIFINANCE') ||
+            $request->filled('PBB')
         ) {
             return match ($request->TOKEN) {
                 'INQ' => $proxyService->inquiry(
@@ -38,9 +39,6 @@ class TelenjarController extends Controller
                 ),
                 default => throw new \Exception('Invalid parameter ' . $request->TOKEN),
             };
-        } elseif ($request->filled('PBB')) {
-            // implementasi untuk PPOB
-            return [];
         }
 
         return $proxyService->purchase(
