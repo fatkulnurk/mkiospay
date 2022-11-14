@@ -23,7 +23,8 @@ class TelenjarController extends Controller
             $request->filled('MULTIFINANCE') ||
             $request->filled('PBB')
         ) {
-            return match ($request->TOKEN) {
+            $param = $request->TOKEN ?? $request->PLN ?? $request->NONTALGIS ?? $request->TELKOM ?? $request->BPJS ?? $request->MULTIFINANCE ?? $request->PBB;
+            return match ($param) {
                 'INQ' => $proxyService->inquiry(
                     $request->trxid,
                     $request->produk,
@@ -37,7 +38,7 @@ class TelenjarController extends Controller
                     $request->respid,
                     $request->nominal
                 ),
-                default => throw new \Exception('Invalid parameter ' . $request->TOKEN),
+                default => throw new \Exception('Invalid parameter ' . $param),
             };
         }
 

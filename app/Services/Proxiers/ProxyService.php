@@ -44,7 +44,7 @@ class ProxyService
     public function pay($uuid, $productCode, $customerCode, $respid, $amount = '')
     {
         $dTime = now()->setTimezone('Asia/Jakarta')->toDateTimeString();
-        $url = config('setting.url.inquiry');
+        $url = config('setting.url.payment');
         $ppidRaw = $this->getPpid();
         $ppid = base64_encode($ppidRaw);
         $udataRaw = $productCode . '|' . $customerCode . '|' . $respid . '|' . $amount;
